@@ -3,6 +3,7 @@ package beginner_project_1.springboot_rest_api.controller;
 import beginner_project_1.springboot_rest_api.bean.Student;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -62,6 +63,23 @@ public class StudentController {
 
 //        passing the id dynamically to the student
         return new Student(studentId, firstName, lastname );
+    }
+
+
+
+//    SpringBoot REST API with Request Param
+//    REST API that handles Query parameters in a request URL
+//    Request URL http://localhost:8080/students/query?id=95&firstName=Lightning&lastName=McQueen
+
+//    @RequestParam => we need to get the query parameter from the URL, by binding the query parameter(id=1) with the method argument
+
+//the REST API URL should be Unique because we are addressing the above List elements
+    @GetMapping("students/query")
+    //    passed id as the method argument
+    public Student studentRequestVariable(@RequestParam int id,
+                                          @RequestParam String firstName,
+                                          @RequestParam String lastName){
+        return new Student(id, firstName,lastName);
     }
 
 }
