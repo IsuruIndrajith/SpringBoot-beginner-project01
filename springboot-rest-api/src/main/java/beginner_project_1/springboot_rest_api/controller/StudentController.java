@@ -2,6 +2,7 @@ package beginner_project_1.springboot_rest_api.controller;
 
 import beginner_project_1.springboot_rest_api.bean.Student;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -44,6 +45,23 @@ public class StudentController {
 //  Above added are for, creating new Student object by calling the constructor of the Student class.
         return students;
 //        returns the students list.
+    }
+
+
+
+
+//    Spring Boot REST API that handles path variable in a request URL
+//    {id} - URI template variable
+//    http://localhost:8080/students/4/Isuru/Indrajith
+//    when the client sends a url like the above, value 4 will be stored in the URI template variable
+    @GetMapping("students/{id}/{first-name}/{last-name}")
+    public Student studentPathVariable(@PathVariable("id") int studentId,
+                                       @PathVariable("first-name") String firstName,
+                                       @PathVariable("last-name") String lastname){
+//        binding the URI template variable to the "id" method arguement
+
+//        passing the id dynamically to the student
+        return new Student(studentId, firstName, lastname );
     }
 
 }
